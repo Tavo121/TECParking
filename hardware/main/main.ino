@@ -4,7 +4,7 @@
 #define RFID_SSPIN 5
 
 rfid rfid(RFID_SSPIN);
-web_manager web_manager("TECParking", "Parking123"); // CAMBIAR SEGUN LA RED
+web_manager web_manager("iPhone", "12123434"); // CAMBIAR SEGUN LA RED
 
 void setup() 
 {
