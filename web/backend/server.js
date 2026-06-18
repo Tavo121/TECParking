@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+const hardwareRoutes = require('./routes/hardwareRoutes')
+
 
 app.use(express.json({ limit: '50mb' })); // Body parser
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
@@ -11,7 +13,7 @@ app.get('/', (req, res) => {
 });
 
 // Public routes (no authentication required)
-//app.use('/api/auth', authRoutes);
+app.use('/api/hardware', hardwareRoutes);
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
 });

@@ -7,7 +7,8 @@
 #include <MFRC522DriverPinSimple.h>
 #include <MFRC522Debug.h>
 
-class rfid{
+class rfid
+{
   private:
     byte sspin;
     MFRC522DriverPinSimple ss_pin;  // SPI pin
