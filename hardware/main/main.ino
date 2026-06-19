@@ -8,7 +8,10 @@
 #define RFID_SSPIN 5
 
 // Pines de ultrasonicos
-#define TRIG_PIN 12
+#define TRIG_PIN_1 12
+#define TRIG_PIN_2 25
+#define TRIG_PIN_3 26
+
 #define ECHO_PIN_1 32
 #define ECHO_PIN_2 35
 #define ECHO_PIN_3 34
@@ -22,9 +25,9 @@
 rfid rfid(RFID_SSPIN);
 web_manager web_manager("iPhone", "12123434"); // CAMBIAR SEGUN LA RED
 
-UltrasonicSensor sensor1(TRIG_PIN, ECHO_PIN_1);
-UltrasonicSensor sensor2(TRIG_PIN, ECHO_PIN_2);
-UltrasonicSensor sensor3(TRIG_PIN, ECHO_PIN_3);
+UltrasonicSensor sensor1(TRIG_PIN_1, ECHO_PIN_1);
+UltrasonicSensor sensor2(TRIG_PIN_2, ECHO_PIN_2);
+UltrasonicSensor sensor3(TRIG_PIN_3, ECHO_PIN_3);
 
 ServoController servoCtrl(SERVO_PIN);
 
