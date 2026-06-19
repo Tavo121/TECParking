@@ -1,7 +1,34 @@
-// Existen 2 ultrasonicos conectados de la siguiente manera:
-// Ultrasonico 1: Trigger en pin físico 12, Echo en pin físico 32.
-// Ultrasonico 2: Trigger en pin físico 12, Echo en pin físico 35.
+#include "ultrasonic.h"
 
-// La idea de este código es que se puedan medir las distancias de ambos ultrasonicos. 
-// Este debe de medir ambos ultrasonicos, considerando el delay que ya
-// existe en el main del código.
+UltrasonicSensor::UltrasonicSensor(int trigPin, int echoPin, int readInterval)
+  : trigPin(trigPin), echoPin(echoPin), lastReadTime(0), readInterval(readInterval)
+{
+};
+
+void UltrasonicSensor::init()
+{
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+};
+
+float UltrasonicSensor::readDistance()
+{
+  // Disparo pulso de 10us
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+
+  // Medir duracion del echo
+  long duration = pulseIn(echoPin, HIGH, 30000); // timeout 30ms (~5m max)
+  
+  if (duration == 0) {
+    return -1.0; // Sin eco
+  }
+
+  // Velocidad del sonido: 343m/s -> 0.0343 cm/us
+  // Distancia = (duracion / 2) * 0.0343
+  float distance = duration * 0.0343 / 2.0;
+  return distance;
+};

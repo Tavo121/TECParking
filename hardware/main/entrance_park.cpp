@@ -1,14 +1,54 @@
-// La idea de este código es que se pueda permitir 
-// o restringir la entrada al parqueo por medio del lector 
-// de tarjetas RFID.
+#include "entrance_park.h"
+#include "rfid_obj.h"
+#include "servo.h"
 
-// Cuando una tarjeta RFID sea leída, se debe comparar con 
-// una lista de tarjetas permitidas. 
-// Si la tarjeta es permitida, se debe abrir el servo. 
-// En caso contrario, se debe mantener cerrado el servo.
+EntrancePark::EntrancePark(rfid* rfidReader, ServoController* servoCtrl)
+  : rfidReader(rfidReader), servoCtrl(servoCtrl), uidCount(0)
+{
+};
 
-// La lista de tarjetas permitidas se puede almacenar en un array o vector.
-// Guardando el UID de cada tarjeta permitida. 
-// Se debe imprimir en el monitor serial el UID de la tarjeta leída y si se permitió o no la entrada.
+void EntrancePark::addAllowedUID(byte uid[4])
+{
+  if (uidCount >= MAX_UIDS) {
+    Serial.println("No se pueden agregar mas UIDs permitidos.");
+    return;
+  }
 
-// Este código se apoyará de rfid_obj.cpp para la lectura de las tarjetas RFID, y de servo.cpp para el control del servo.
+  for (byte i = 0; i < 4; i++) {
+    allowedUIDs[uidCount][i] = uid[i];
+  }
+  uidCount++;
+};
+
+bool EntrancePark::isUIDAllowed(byte uid[4])
+{
+  for (int i = 0; i < uidCount; i++) {
+    if (rfidReader->compareUID(uid, allowedUIDs[i], 4)) {
+      return true;
+    }
+  }
+  return false;
+};
+
+void EntrancePark::checkAccess()
+{
+  byte uid[4];
+  byte uidLength;
+
+  if (!rfidReader->readCardUID(uid, &uidLength)) {
+    return; // No hay tarjeta nueva
+  }
+
+  // Imprimir UID leido
+  Serial.print("Tarjeta detectada - ");
+  rfidReader->printUID(uid, uidLength);
+
+  if (isUIDAllowed(uid)) {
+    Serial.println("Acceso PERMITIDO - Abriendo barrera");
+    servoCtrl->openServo();
+    delay(4000); // Mantener abierta 4 segundos
+    servoCtrl->closeServo();
+  } else {
+    Serial.println("Acceso DENEGADO - Tarjeta no autorizada");
+  }
+};

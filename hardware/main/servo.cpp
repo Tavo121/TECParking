@@ -1,5 +1,22 @@
-// Servo conectado a pin físico 33 de un ESP32D.
-// La idea de este código es que tenga dos funciones: 
-// Abrir (mover el servo a 90 grados) y cerrar (mover el servo a 0 grados).
-
 #include "servo.h"
+
+ServoController::ServoController(int pin, int openAngle, int closeAngle)
+  : pin(pin), openAngle(openAngle), closeAngle(closeAngle)
+{
+};
+
+void ServoController::init()
+{
+  servoMotor.attach(pin);
+  servoMotor.write(closeAngle); // Inicia cerrado
+};
+
+void ServoController::openServo()
+{
+  servoMotor.write(openAngle);
+};
+
+void ServoController::closeServo()
+{
+  servoMotor.write(closeAngle);
+};
