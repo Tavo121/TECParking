@@ -16,6 +16,10 @@
 #define ECHO_PIN_2 35
 #define ECHO_PIN_3 34
 
+//#define SPACE1 1
+#define SPACE2 1
+#define SPACE3 2
+
 // Pin del servo
 #define SERVO_PIN 33
 
@@ -25,15 +29,15 @@
 rfid rfid(RFID_SSPIN);
 web_manager web_manager("iPhone", "12123434"); // CAMBIAR SEGUN LA RED
 
-UltrasonicSensor sensor1(TRIG_PIN_1, ECHO_PIN_1);
+//UltrasonicSensor sensor1(TRIG_PIN_1, ECHO_PIN_1);
 UltrasonicSensor sensor2(TRIG_PIN_2, ECHO_PIN_2);
 UltrasonicSensor sensor3(TRIG_PIN_3, ECHO_PIN_3);
 
 ServoController servoCtrl(SERVO_PIN);
 
-SpacePark space1(1, &web_manager, &sensor1);
-SpacePark space2(2, &web_manager, &sensor2);
-SpacePark space3(3, &web_manager, &sensor3);
+//SpacePark space1(SPACE1, &web_manager, &sensor1);
+SpacePark space2(SPACE2, &web_manager, &sensor2);
+SpacePark space3(SPACE3, &web_manager, &sensor3);
 
 EntrancePark entrance(&rfid, &servoCtrl);
 
@@ -46,7 +50,7 @@ void setup()
   // Inicializar componentes
   web_manager.init();
   servoCtrl.init();
-  sensor1.init();
+  //sensor1.init();
   sensor2.init();
   sensor3.init();
 
@@ -74,8 +78,10 @@ void loop()
     lastCycleTime = currentMillis;
 
     // Actualizar estado de espacios de parqueo
-    space1.update();
+    //space1.update();
+    //delay(30);
     space2.update();
+    //delay(30);
     space3.update();
 
     // Verificar acceso por RFID

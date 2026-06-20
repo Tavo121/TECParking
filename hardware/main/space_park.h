@@ -9,7 +9,7 @@ class UltrasonicSensor;
 class SpacePark
 {
   private:
-    int spaceId;
+    const int spaceId;
     web_manager* webManager;
     UltrasonicSensor* sensor;
     float threshold;
@@ -17,7 +17,7 @@ class SpacePark
     bool firstRead;
 
   public:
-    SpacePark(int spaceId, web_manager* webManager, UltrasonicSensor* sensor, float threshold = 10.0);
+    SpacePark(const int spaceId, web_manager* webManager, UltrasonicSensor* sensor, float threshold = 10.0);
     void update();
 };
 

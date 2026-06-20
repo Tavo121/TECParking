@@ -2,7 +2,7 @@
 #include "ultrasonic.h"
 #include "web_manager_obj.h"
 
-SpacePark::SpacePark(int spaceId, web_manager* webManager, UltrasonicSensor* sensor, float threshold)
+SpacePark::SpacePark(const int spaceId, web_manager* webManager, UltrasonicSensor* sensor, float threshold)
   : spaceId(spaceId), webManager(webManager), sensor(sensor), threshold(threshold),
     firstRead(true)
 {
