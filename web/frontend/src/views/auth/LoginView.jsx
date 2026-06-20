@@ -16,25 +16,6 @@ export default function LoginView() {
     setIsLoading(true);
     setError(null);
 
-    // ==========================================
-    // MODO DESARROLLO: USUARIOS QUEMADOS
-    // ¡ELIMINAR ESTO ANTES DE CONECTAR EL ESP32 FINAL!
-    // ==========================================
-    if (credentials.email === 'admin@tec.com' && credentials.password === 'admin123') {
-      document.cookie = `user=${encodeURIComponent(JSON.stringify({ name: 'Administrador TEC', email: credentials.email }))}; path=/`;
-      document.cookie = `role=admin; path=/`;
-      navigate('/admin');
-      return; // Detiene la ejecución aquí, no llama al backend
-    }
-
-    if (credentials.email === 'user@tec.com' && credentials.password === 'user123') {
-      document.cookie = `user=${encodeURIComponent(JSON.stringify({ name: 'Usuario Estándar', email: credentials.email }))}; path=/`;
-      document.cookie = `role=user; path=/`;
-      navigate('/user'); // O la ruta que le hayas puesto a tu app móvil
-      return; // Detiene la ejecución aquí
-    }
-    // ==========================================
-
     try {
       // El proxy de Vite enviará esto a http://localhost:3001/api/auth/login
       const response = await fetch('/api/auth/login', {
