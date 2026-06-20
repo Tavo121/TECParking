@@ -19,6 +19,10 @@ class rfid
     rfid(byte sspin);
     void init();
     void test();
+    bool hasNewCard();
+    bool readCardUID(byte* uidOut, byte* uidLength);
+    void printUID(byte* uid, byte uidLength);
+    bool compareUID(byte* uid1, byte* uid2, byte len);
 };
 
 #endif
