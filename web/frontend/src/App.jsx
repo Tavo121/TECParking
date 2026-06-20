@@ -2,23 +2,24 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import LoginView from './views/auth/LoginView';
 import AdminLayout from './views/admin/AdminLayout';
 import DashboardDashboardView from './views/admin/DashboardDashboardView';
-// Importa tu App móvil anterior como UserMobileApp o similar
+import UserMobileLayout from './views/user/UserMobileLayout';
 
 export default function App() {
   return (
     <Router>
       <Routes>
+        {/* Pantalla de autenticación */}
         <Route path="/login" element={<LoginView />} />
         
-        {/* Rutas de Administrador (Desktop) */}
+        {/* Panel de Control para el Administrador (PC/Escritorio) */}
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<DashboardDashboardView />} />
-          {/* Añade sub-rutas /admin/map, /admin/users, etc. */}
         </Route>
 
-        {/* Rutas de Usuario (Mobile) */}
-        {/* <Route path="/user/*" element={<UserMobileApp />} /> */}
+        {/* Aplicación Móvil para el Usuario Común (Smartphone/PC) */}
+        <Route path="/user" element={<UserMobileLayout />} />
 
+        {/* Redirección por defecto si no hay sesión activa */}
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </Router>
