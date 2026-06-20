@@ -13,7 +13,7 @@ export default function MapView({ spaces, selectedSpace, onSelectSpace, onNaviga
           
           {/* Columna Izquierda (A7, A6, etc.) */}
           <div className="flex flex-col justify-between space-y-4">
-            {spaces.filter(s => ['A1', 'A7', 'A6', 'A5'].includes(s.id)).map(space => (
+            {spaces.filter(s => ['A8', 'A7', 'A6', 'A5'].includes(s.id)).map(space => (
               <SlotCard key={space.id} space={space} isSelected={selectedSpace?.id === space.id} onClick={() => onSelectSpace(space)} />
             ))}
           </div>
@@ -32,7 +32,7 @@ export default function MapView({ spaces, selectedSpace, onSelectSpace, onNaviga
 
           {/* Columna Derecha (A4, A3, etc.) */}
           <div className="flex flex-col justify-between space-y-4">
-            {spaces.filter(s => ['A4', 'A3', 'A2', 'A8'].includes(s.id)).map(space => (
+            {spaces.filter(s => ['A4', 'A2', 'A3', 'A1'].includes(s.id)).map(space => (
               <SlotCard key={space.id} space={space} isSelected={selectedSpace?.id === space.id} onClick={() => onSelectSpace(space)} />
             ))}
           </div>

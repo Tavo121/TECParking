@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useSocketIO from '../../hooks/useSocketIO';
 import DashboardDashboardView from './DashboardDashboardView';
 import MapView from '../MapView'; // Reutilización limpia del plano de parqueo
 import UsersAdminView from './UsersAdminView'; // Componente de gestión añadido
@@ -9,16 +10,27 @@ export default function AdminLayout() {
   const [activeTab, setActiveTab] = useState('dashboard'); // Control dinámico de las pestañas
 
   // Estado compartido simulado para el mapa de administración
-  const [spaces] = useState([
+  const [spaces, setSpaces] = useState([
     { id: 'A1', status: 'ocupado', isPhysicalSensor: false },
-    { id: 'A7', status: 'libre', isPhysicalSensor: true },
-    { id: 'A6', status: 'libre', isPhysicalSensor: true },
-    { id: 'A5', status: 'ocupado', isPhysicalSensor: false },
-    { id: 'A4', status: 'libre', isPhysicalSensor: false },
     { id: 'A3', status: 'libre', isPhysicalSensor: true },
     { id: 'A2', status: 'ocupado', isPhysicalSensor: false },
-    { id: 'A8', status: 'ocupado', isPhysicalSensor: false },
   ]);
+
+  // Manejador para actualizar espacios desde Socket.io
+  const handleSpaceUpdated = (data) => {
+    const { space_id, state } = data;
+    const statusString = state === true ? 'ocupado' : 'libre';
+    const spaceIdFormatted = `A${space_id}`;
+    
+    setSpaces(prev => prev.map(space => 
+      space.id === spaceIdFormatted 
+        ? { ...space, status: statusString } 
+        : space
+    ));
+  };
+
+  // Conectar a Socket.io para recibir actualizaciones en tiempo real
+  useSocketIO(handleSpaceUpdated);
 
   const handleLogout = () => {
     document.cookie = 'user=; Max-Age=-99999999; path=/';

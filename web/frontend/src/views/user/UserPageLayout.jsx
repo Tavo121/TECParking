@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useSocketIO from '../../hooks/useSocketIO';
 import MapView from '../MapView';
 import ConfigureReservation from './ConfigureReservation';
 import AccessControlView from './AccessControlView';
@@ -15,14 +16,27 @@ export default function UserPageLayout() {
 
   const [spaces, setSpaces] = useState([
     { id: 'A1', status: 'ocupado', isPhysicalSensor: false },
-    { id: 'A7', status: 'libre', isPhysicalSensor: true },
-    { id: 'A6', status: 'libre', isPhysicalSensor: true },
-    { id: 'A5', status: 'ocupado', isPhysicalSensor: false },
-    { id: 'A4', status: 'libre', isPhysicalSensor: false },
     { id: 'A3', status: 'libre', isPhysicalSensor: true },
     { id: 'A2', status: 'ocupado', isPhysicalSensor: false },
-    { id: 'A8', status: 'ocupado', isPhysicalSensor: false },
   ]);
+
+  // Manejador para actualizar espacios desde Socket.io
+  const handleSpaceUpdated = (data) => {
+    const { space_id, state } = data;
+    // Convertir booleano a string: true -> "ocupado", false -> "libre"
+    const statusString = state === true ? 'ocupado' : 'libre';
+    // Convertir space_id int a formato string 'A<numero>'
+    const spaceIdFormatted = `A${space_id}`;
+    
+    setSpaces(prev => prev.map(space => 
+      space.id === spaceIdFormatted 
+        ? { ...space, status: statusString } 
+        : space
+    ));
+  };
+
+  // Conectar a Socket.io para recibir actualizaciones en tiempo real
+  useSocketIO(handleSpaceUpdated);
 
   useEffect(() => {
     let timer;
