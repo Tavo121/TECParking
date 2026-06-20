@@ -1,25 +1,22 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import LoginView from './views/auth/LoginView';
 import AdminLayout from './views/admin/AdminLayout';
-import DashboardDashboardView from './views/admin/DashboardDashboardView';
-import UserMobileLayout from './views/user/UserMobileLayout';
+import UserPageLayout from './views/user/UserPageLayout';
 
 export default function App() {
   return (
     <Router>
       <Routes>
-        {/* Pantalla de autenticación */}
+        {/* Portal de entrada */}
         <Route path="/login" element={<LoginView />} />
         
-        {/* Panel de Control para el Administrador (PC/Escritorio) */}
-        <Route path="/admin" element={<AdminLayout />}>
-          <Route index element={<DashboardDashboardView />} />
-        </Route>
+        {/* Flujo Administrativo Centralizado (PC) */}
+        <Route path="/admin" element={<AdminLayout />} />
 
-        {/* Aplicación Móvil para el Usuario Común (Smartphone/PC) */}
-        <Route path="/user" element={<UserMobileLayout />} />
+        {/* Flujo Conductores Formato Web Expansivo */}
+        <Route path="/user" element={<UserPageLayout />} />
 
-        {/* Redirección por defecto si no hay sesión activa */}
+        {/* Captura de rutas huérfanas */}
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </Router>
