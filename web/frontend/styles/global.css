@@ -1,0 +1,206 @@
+/* ============================================
+   VARIABLES GLOBALES DE ESTILO - CLÍNICA AURORA
+   ============================================ */
+
+:root {
+  /* Colores principales */
+  --color-primary: #0ea5a4;
+  --color-primary-hover: #0b8685;
+  --color-primary-soft: #e6f7f7;
+  --color-accent: #f59e0b;
+  
+  /* Colores neutrales */
+  --color-background: #f8fafc;
+  --color-foreground: #0f172a;
+  --color-muted: #64748b;
+  --color-border: #e2e8f0;
+  --color-white: #ffffff;
+  
+  /* Colores de estado */
+  --color-success: #10b981;
+  --color-error: #ef4444;
+  --color-warning: #f59e0b;
+  --color-info: #3b82f6;
+  
+  /* Tipografía */
+  --font-family-base: 'Inter', 'ui-sans-serif', 'system-ui', sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* Tamaños de fuente */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  
+  /* Espaciado */
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-10: 2.5rem;
+  --spacing-12: 3rem;
+  --spacing-16: 4rem;
+  --spacing-24: 6rem;
+  
+  /* Radios de esquina */
+  --border-radius-sm: 0.375rem;
+  --border-radius-md: 0.5rem;
+  --border-radius-lg: 0.75rem;
+  --border-radius-xl: 1rem;
+  --border-radius-full: 9999px;
+  
+  /* Sombras */
+  --shadow-soft: 0 4px 20px -4px rgba(15, 23, 42, 0.08);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  
+  /* Transiciones */
+  --transition-fast: 150ms ease-in-out;
+  --transition-base: 200ms ease-in-out;
+  --transition-slow: 300ms ease-in-out;
+  
+  /* Z-Index */
+  --z-dropdown: 10;
+  --z-sticky: 20;
+  --z-fixed: 30;
+  --z-modal-backdrop: 40;
+  --z-modal: 50;
+}
+
+/* ============================================
+   UTILIDADES REUTILIZABLES
+   ============================================ */
+
+/* Contenedor de página */
+.container-page {
+  max-width: 1344px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--spacing-4);
+  padding-right: var(--spacing-4);
+}
+
+@media (min-width: 640px) {
+  .container-page {
+    padding-left: var(--spacing-6);
+    padding-right: var(--spacing-6);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-page {
+    padding-left: var(--spacing-8);
+    padding-right: var(--spacing-8);
+  }
+}
+
+/* Botones */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  border-radius: var(--border-radius-full);
+  background-color: var(--color-primary);
+  padding-left: var(--spacing-6);
+  padding-right: var(--spacing-6);
+  padding-top: var(--spacing-3);
+  padding-bottom: var(--spacing-3);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-white);
+  box-shadow: var(--shadow-soft);
+  transition: background-color var(--transition-base);
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.btn-primary:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-white), 0 0 0 4px var(--color-primary);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  border-radius: var(--border-radius-full);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-white);
+  padding-left: var(--spacing-6);
+  padding-right: var(--spacing-6);
+  padding-top: var(--spacing-3);
+  padding-bottom: var(--spacing-3);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-foreground);
+  transition: all var(--transition-base);
+  cursor: pointer;
+}
+
+.btn-ghost:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.btn-ghost:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-white), 0 0 0 4px var(--color-primary);
+}
+
+/* Tipos de texto */
+.text-primary {
+  color: var(--color-primary);
+}
+
+.text-muted {
+  color: var(--color-muted);
+}
+
+.text-foreground {
+  color: var(--color-foreground);
+}
+
+/* Fondos */
+.bg-primary-soft {
+  background-color: var(--color-primary-soft);
+}
+
+.bg-background {
+  background-color: var(--color-background);
+}
+
+/* Bordes */
+.border-border {
+  border-color: var(--color-border);
+}
+
+/* Efectos de hover y transiciones */
+.transition-smooth {
+  transition: all var(--transition-base);
+}
+
+/* ============================================
+   RESPONSIVE UTILITIES
+   ============================================ */
+
+@media (max-width: 640px) {
+  :root {
+    --font-size-2xl: 1.25rem;
+    --font-size-3xl: 1.5rem;
+  }
+}
