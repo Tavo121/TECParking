@@ -2,6 +2,13 @@
 
 Sistema inteligente de gestión de estacionamiento en tiempo real utilizando ESP32, sensores ultrasónicos y tecnología RFID.
 
+## Integrantes
+
+- Angelo Fabian Ceciliano Ortega
+- Gustavo Alvarado Aburto
+- Kevin Esteban Chinchilla Rodríguez
+- Deilyn Araya Araya
+
 ## Descripción
 
 TECParking es un sistema IoT completo que permite monitorear y gestionar espacios de estacionamiento en tiempo real. El sistema detecta automáticamente la ocupación de espacios mediante sensores ultrasónicos, controla el acceso mediante tarjetas RFID y proporciona una interfaz web para visualizar el estado del estacionamiento y gestionar reservas.
@@ -203,10 +210,5 @@ npm run dev
 - Navegar a la sección "Mis Reservas"
 - Seleccionar un espacio disponible para reservar
 
-## Integrantes
 
-- Angelo Fabian Ceciliano Ortega
-- Gustavo Alvarado Aburto
-- Kevin Esteban Chinchilla Rodríguez
-- Deilyn Araya Araya
 
